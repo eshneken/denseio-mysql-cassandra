@@ -13,6 +13,11 @@
 sudo yum -y install docker
 
 #
+# grow oci root partition
+#
+sudo /usr/libexec/oci-growfs -y
+
+#
 # disable linux firewall
 #
 sudo service firewalld stop
@@ -58,11 +63,11 @@ sudo docker run --name mysql -d -p 3306:3306 --cpus=8 --memory=16g  -e MYSQL_ROO
 #
 mkdir /u01/cassandra-data
 
-# first host in ring
-#sudo docker run --name cassandra -d -p 7000:7000 --cpus=24 --memory=50g -e CASSANDRA_BROADCAST_ADDRESS=10.0.0.145 -v /u01/cassandra-data:/var/lib/cassandra cassandra:3.0.27
+# first host in ring - replace PRIVATEIP with IP of instance
+#sudo docker run --name cassandra -d -p 7000:7000 --cpus=24 --memory=50g -e CASSANDRA_BROADCAST_ADDRESS=PRIVATEIP -v /u01/cassandra-data:/var/lib/cassandra cassandra:3.0.27
 
-# each additional host in ring -- replace PRIVATEIP with IP of instance
-#sudo docker run --name cassandra -d -p 7000:7000 --cpus=24 --memory=50g -e CASSANDRA_BROADCAST_ADDRESS=PRIVATEIP -e CASSANDRA_SEEDS=10.0.0.145 cassandra:3.0.27
+# each additional host in ring -- replace PRIVATEIP with IP of instance and FIRSTIP with IP of first host in ring
+#sudo docker run --name cassandra -d -p 7000:7000 --cpus=24 --memory=50g -e CASSANDRA_BROADCAST_ADDRESS=PRIVATEIP -e CASSANDRA_SEEDS=FIRSTIP cassandra:3.0.27
 
 
 
