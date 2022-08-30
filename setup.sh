@@ -67,7 +67,7 @@ mkdir /u01/cassandra-data
 #sudo docker run --name cassandra -d -p 7000:7000 --cpus=24 --memory=50g -e CASSANDRA_BROADCAST_ADDRESS=PRIVATEIP -v /u01/cassandra-data:/var/lib/cassandra cassandra:3.0.27
 
 # each additional host in ring -- replace PRIVATEIP with IP of instance and FIRSTIP with IP of first host in ring
-#sudo docker run --name cassandra -d -p 7000:7000 --cpus=24 --memory=50g -e CASSANDRA_BROADCAST_ADDRESS=PRIVATEIP -e CASSANDRA_SEEDS=FIRSTIP cassandra:3.0.27
+#sudo docker run --name cassandra -d -p 7000:7000 --cpus=24 --memory=50g -e CASSANDRA_BROADCAST_ADDRESS=PRIVATEIP -e CASSANDRA_SEEDS=FIRSTIP -v /u01/cassandra-data:/var/lib/cassandra cassandra:3.0.27
 
 
 
