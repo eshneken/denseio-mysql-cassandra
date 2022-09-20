@@ -10,6 +10,7 @@
 #
 # docker install
 #
+sudo yum update -y
 sudo yum -y install docker
 
 #
@@ -33,7 +34,7 @@ sudo systemctl enable --now docker
 # https://docs.oracle.com/en/learn/ol-mdadm/index.html
 #
 sudo mdadm --create /dev/md0 --raid-devices=4 --level=0 /dev/nvme0n1 /dev/nvme1n1 /dev/nvme2n1 /dev/nvme3n1
-sudo mkfs.xfs /dev/md0
+sudo mkfs.ext4 -b size=4096 /dev/md0
 sudo mkdir /u01
 sudo mount /dev/md0 /u01
 sudo chown -R opc:opc /u01
@@ -55,7 +56,11 @@ echo "innodb_buffer_pool_size=10737418240" | tee -a /u01/mysql-config/my.cnf > /
 echo "innodb_flush_method=O_DIRECT" | tee -a /u01/mysql-config/my.cnf > /dev/null
 echo "innodb_doublewrite=1" | tee -a /u01/mysql-config/my.cnf > /dev/null
 
-sudo docker run --name mysql -d -p 3306:3306 --cpus=8 --memory=16g  -e MYSQL_ROOT_PASSWORD=BoedyPoCPwd123! -v /u01/mysql-config:/etc/mysql/conf.d:rw -v /u01/mysql-data:/var/lib/mysql:rw docker.io/mysql:8
+sudo sysctl -w vm.swappiness=1
+
+export DB_PASSWORD=YourTopSecretPassword
+
+sudo docker run --name mysql -d -p 3306:3306 --cpus=8 --memory=16g  -e MYSQL_ROOT_PASSWORD=$DB_PASSWORD -v /u01/mysql-config:/etc/mysql/conf.d:rw -v /u01/mysql-data:/var/lib/mysql:rw docker.io/mysql:8
 
 #
 # Run Cassandra
