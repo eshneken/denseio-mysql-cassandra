@@ -36,6 +36,14 @@ cat /proc/cmdline
 ## https://linuxconfig.org/how-to-move-docker-s-default-var-lib-docker-to-another-directory-on-ubuntu-debian-linux
 ##
 
+## 
+## apply sysctl changes
+##
+## https://www.cyberciti.biz/faq/howto-set-sysctl-variables/
+##
+sudo cp sysctl.txt /etc/sysctl.d/99-custom.conf
+sudo sysctl -p /etc/sysctl.d/99-custom.conf
+
 ## watch iostat on server
 iostat -xd 5 -g total
 
