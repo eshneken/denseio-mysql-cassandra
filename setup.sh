@@ -59,19 +59,19 @@ max_prepared_stmt_count=1048576
 innodb_doublewrite=1
 
 # log settings
-user=mysql
-log_error=mysqld.log
+#user=mysql
+#log_error=mysqld.log
 
 # nicolas settings
-innodb_buffer_pool_size=450G
-innodb_change_buffering=none
-innodb_doublewrite_pages=128
-innodb_flush_neighbors=0
-innodb_io_capacity=2000
-innodb_io_capacity_max=2000
-innodb_log_buffer_size=67108864
-innodb_max_purge_lag=0
-innodb_use_fdatasync=ON
+#innodb_buffer_pool_size=450G
+#innodb_change_buffering=none
+#innodb_doublewrite_pages=128
+#innodb_flush_neighbors=0
+#innodb_io_capacity=2000
+#innodb_io_capacity_max=2000
+#innodb_log_buffer_size=67108864
+#innodb_max_purge_lag=0
+#innodb_use_fdatasync=ON
 EOF
 
 export DB_PASSWORD=YourTopSecretPassword
