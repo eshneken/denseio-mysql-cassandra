@@ -46,7 +46,7 @@ echo "/dev/md0    /u01  ext4    defaults    0 0" | sudo tee -a /etc/fstab > /dev
 #
 # To test config variables get picked up:
 # 1. sudo yum -y install mysql
-# 2. mysql -uroot -pBoedyPoCPwd123! -h127.0.0.1 -P3306 -e 'show global variables';
+# 2. mysql -uroot -p$DB_PASSWORD -h127.0.0.1 -P3306 -e 'show global variables';
 #
 mkdir /u01/mysql-data
 mkdir /u01/mysql-config
