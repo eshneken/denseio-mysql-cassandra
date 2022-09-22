@@ -34,7 +34,7 @@ sudo systemctl enable --now docker
 # https://docs.oracle.com/en/learn/ol-mdadm/index.html
 #
 sudo mdadm --create /dev/md0 --raid-devices=4 --level=0 /dev/nvme0n1 /dev/nvme1n1 /dev/nvme2n1 /dev/nvme3n1
-sudo mkfs.ext4 -b size=4096 /dev/md0
+sudo mkfs.ext4 -b 4096 /dev/md0
 sudo mkdir /u01
 sudo mount /dev/md0 /u01
 sudo chown -R opc:opc /u01
