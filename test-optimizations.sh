@@ -59,7 +59,10 @@ sudo docker ps
 sudo cp sysctl.txt /etc/sysctl.d/99-custom.conf
 sudo sysctl -p /etc/sysctl.d/99-custom.conf
 
-## watch iostat on server
+## Verify blocksize and make sure it is 4K
+sudo tune2fs -l /dev/md0 | grep -i 'block size'
+
+## Watch iostat on server while test is running.  Make all r/w goes to /dev/md0 and not /dev/sda
 iostat -xd 5 -g total
 
 
