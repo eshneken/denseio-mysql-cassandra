@@ -57,6 +57,7 @@ innodb_buffer_pool_size=10737418240
 innodb_flush_method=O_DIRECT
 max_prepared_stmt_count=1048576
 innodb_doublewrite=1
+innodb_redo_log_capacity=128000000000
 
 # log settings
 #user=mysql
@@ -76,7 +77,7 @@ EOF
 
 export DB_PASSWORD=YourTopSecretPassword
 
-sudo docker run --name mysql -d -p 3306:3306 --cpus=8 --memory=17g  -e MYSQL_ROOT_PASSWORD=$DB_PASSWORD -v /u01/mysql-config:/etc/mysql/conf.d:rw -v /u01/mysql-data:/var/lib/mysql:rw docker.io/mysql:8
+sudo docker run --name mysql -d -p 3306:3306 --cpuset-cpus=0:7 --memory=17g  -e MYSQL_ROOT_PASSWORD=$DB_PASSWORD -v /u01/mysql-config:/etc/mysql/conf.d:rw -v /u01/mysql-data:/var/lib/mysql:rw docker.io/mysql:8
 
 #
 # Run Cassandra
