@@ -59,4 +59,16 @@ sudo tune2fs -l /dev/md0 | grep -i 'block size'
 ## Watch iostat on server while test is running.  Make all r/w goes to /dev/md0 and not /dev/sda
 iostat -xd 5 -g total
 
+## list sibling hyperthreads
+for i in $(seq 0 7); do cat /sys/devices/system/cpu/cpu${i}/topology/thread_siblings_list; done
+
+## list cpu sleep states
+cpupower idle-info 
+
+## disable the last sleep state with 30us latency
+sudo cpupower idle-set -D 29 
+
+## enable all cpu sleep states
+sudo cpupower idle-set -E
+
 
